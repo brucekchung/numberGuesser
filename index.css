@@ -1,0 +1,84 @@
+/*Structure*/
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #404041;
+  text-align: center;
+  padding: 10px;
+}
+
+main {
+  width: 400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.center-text {
+  margin: 0 auto;
+  clear: both;
+}
+
+
+/*Style*/
+* {
+  font-family: sans-serif;
+  font-style: bold 700;
+
+}
+
+.number {
+  color: #ED458B;
+}
+
+h1 {
+  color: #E6E7E8;
+  font-size: 300%;
+}
+
+h2,
+h3 {
+  text-align: center;
+}
+
+button {
+  background-color: #929497;
+  color: #FFFFFF;
+  border-radius: 30%;
+  height: 30px;
+  width: 40%;
+  margin: 10px;
+}
+
+#guess {
+  float: left;
+}
+
+#clear {
+  float: right;
+}
+
+button:hover {
+  background-color: #EB008B;
+  color: #FFFFFF;
+}
+
+#guess-box {
+  height: 40px;
+  font-size: 25px;
+  clear: both;
+  display: block;
+  margin: 0 auto;
+}
+
+#reset {
+  display: block;
+  margin: 0 auto;
+}
+
+input {
+  height: 40px;
+  font-size: 18px;
+  margin: 10px;
+
+}
