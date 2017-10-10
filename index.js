@@ -7,7 +7,7 @@ var lastGuess = document.getElementById('last-guess');
 var feedback = document.getElementById('feedback');
 var max = 100;
 var min = 0;
-var formulaMax = 100;
+var formulaMax = 101;
 var formulaMin = 0;
 var randomNumber = numberGenerator();
 var minButton = document.getElementById('min-button');
@@ -29,13 +29,19 @@ function numberGenerator() {
   return Math.floor(Math.random() * formulaMax + formulaMin);
 }
 
+function britishInsultGenerator() {
+  let adj = ["mangy", "dodgy", "daft", "barmy", "pikey", "trollop", "chuffer", "berk", "plug-ugly", "sod", "gormless", "incompetent"];
+  let noun = ["ninny", "nutter", "git", "wanker", "tosser", "slag", "cow", "twit", "ligger", "arsemonger", "mingebag", "cheese eating surrender monkey"];
+  return adj[Math.floor(Math.random() * 12)] + ' ' + noun[Math.floor(Math.random() * 12)]
+}
+
 function getFeedback() {
   let input = guessField.value;
   if (isNaN(parseInt(input))) {
-    feedback.innerText = 'Enter a NUMBER, Turd Burglar';
+    feedback.innerText = 'Enter a NUMBER, ' + britishInsultGenerator();
   }
   else if (input > max || input < min) {
-    feedback.innerText = 'Enter a number between ' + min + ' and ' + max;
+    feedback.innerText = 'Enter a number between ' + min + ' and ' + max + ' you ' + britishInsultGenerator();
   }
   else if (input == randomNumber) {
     feedback.innerText = 'Winner Winner Chicken Dinner! Increased max and min by 10!';
@@ -69,7 +75,7 @@ function resetGame() {
   min = 0;
   max = 100;
   formulaMin = 0;
-  formulaMax = 100;
+  formulaMax = 101;
   randomNumber = numberGenerator();
 }
 
@@ -88,26 +94,33 @@ function disableOrEnable() {
 }
 
 function inputRange(value) {
+  if (value.match(/[a-zA-Z]/g)) {
+    return '';
+  }
   if (value.length == 1) {
     return value;
   }
   else if (parseInt(value) < min) {
-    feedback.innerText = 'Enter a number between ' + min + ' and ' + max;
+    feedback.innerText = 'Enter a number between ' + min + ' and ' + max + ' you ' + britishInsultGenerator();    
     return min;
   }
   else if (parseInt(value) > max) {
-    feedback.innerText = 'Enter a number between ' + min + ' and ' + max;
+    feedback.innerText = 'Enter a number between ' + min + ' and ' + max + ' you ' + britishInsultGenerator();
     return max;
   }
-  else return value; 
+  else {
+    return value; 
+  }
 }
 
 function setMin() {
   min = minField.value;
+  forumlaMin = minField.value;
 }
 
 function setMax() {
   max = maxField.value;
+  formulaMax = maxField.value - minField.value;
 }
 
 function increaseRange() {
