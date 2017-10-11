@@ -55,6 +55,7 @@ button {
   width: 40%;
   margin: 10px;
   display: inline-block;
+  border: none;
 }
 
 #last-guess {

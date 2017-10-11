@@ -26,19 +26,19 @@ maxButton.addEventListener('click', setMax);
 
 /*FUNCTIONS*/
 function numberGenerator() {
-  return Math.floor(Math.random() * formulaMax + formulaMin);
+  return Math.floor((Math.random() * formulaMax) + formulaMin);
 }
 
 function britishInsultGenerator() {
   let adj = ["mangy", "dodgy", "daft", "barmy", "pikey", "trollop", "chuffer", "berk", "plug-ugly", "sod", "gormless", "incompetent"];
-  let noun = ["ninny", "nutter", "git", "wanker", "tosser", "slag", "cow", "twit", "ligger", "arsemonger", "mingebag", "cheese eating surrender monkey"];
+  let noun = ["ninny", "nutter", "git", "wanker", "tosser", "slag", "cow", "twit", "ligger", "arsemonger", "mingebag", "cheese-eating surrender-monkey"];
   return adj[Math.floor(Math.random() * 12)] + ' ' + noun[Math.floor(Math.random() * 12)]
 }
 
 function getFeedback() {
   let input = guessField.value;
   if (isNaN(parseInt(input))) {
-    feedback.innerText = 'Enter a NUMBER, ' + britishInsultGenerator();
+    feedback.innerText = 'Enter a NUMBER, you ' + britishInsultGenerator();
   }
   else if (input > max || input < min) {
     feedback.innerText = 'Enter a number between ' + min + ' and ' + max + ' you ' + britishInsultGenerator();
@@ -69,7 +69,7 @@ function clearInput() {
 function resetGame() {
   lastGuess.innerText = '?';
   guessField.value = '';
-  feedback.innerText = '';
+  feedback.innerText = 'Number guessing game';
   minField.value = '';
   maxField.value = '';
   min = 0;
@@ -77,6 +77,7 @@ function resetGame() {
   formulaMin = 0;
   formulaMax = 101;
   randomNumber = numberGenerator();
+  disableButton();
 }
 
 function disableButton() {
@@ -97,7 +98,7 @@ function inputRange(value) {
   if (value.match(/[a-zA-Z]/g)) {
     return '';
   }
-  if (value.length == 1) {
+  else if (value.length == 1) {
     return value;
   }
   else if (parseInt(value) < min) {
@@ -112,15 +113,23 @@ function inputRange(value) {
     return value; 
   }
 }
-
+//currently setting off a nonexitant max field!
 function setMin() {
   min = minField.value;
-  forumlaMin = minField.value;
+  formulaMin = minField.value;
+  console.log("formulaMin", formulaMin);
+  console.log("min", min);
+  randomNumber = numberGenerator();
+  console.log("randomNumber", randomNumber);
 }
-
+//currently setting of a nonexistant min field!
 function setMax() {
   max = maxField.value;
   formulaMax = maxField.value - minField.value;
+  console.log("formulaMax", formulaMax);
+  console.log("max", max);
+  randomNumber = numberGenerator();
+  console.log("randomNumber", randomNumber);
 }
 
 function increaseRange() {
@@ -131,4 +140,4 @@ function increaseRange() {
 }
 
 /*Quality of Life*/
-guessField.focus
+guessField.focus();
