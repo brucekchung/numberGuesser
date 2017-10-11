@@ -1,4 +1,5 @@
 /*GLOBAL VARIABLES*/
+var randomNumber = numberGenerator();
 var guessField = document.getElementById('guess-box');
 var guessButton = document.getElementById('guess');
 var clearButton = document.getElementById('clear');
@@ -9,9 +10,7 @@ var max = 100;
 var min = 0;
 var formulaMax = 101;
 var formulaMin = 0;
-var randomNumber = numberGenerator();
-var minButton = document.getElementById('min-button');
-var maxButton = document.getElementById('max-button');
+var rangeButton = document.getElementById('range-button');
 var minField = document.getElementById('min-box');
 var maxField = document.getElementById('max-box');
 
@@ -21,12 +20,14 @@ guessButton.addEventListener('click', getFeedback);
 clearButton.addEventListener('click', clearInput);
 //two guessField event listeners in HTML
 resetButton.addEventListener('click', resetGame);
-minButton.addEventListener('click', setMin);
-maxButton.addEventListener('click', setMax);
+rangeButton.addEventListener('click', setRange);
+
 
 /*FUNCTIONS*/
 function numberGenerator() {
-  return Math.floor((Math.random() * formulaMax) + formulaMin);
+  console.log("numGen fMin", formulaMin);
+  console.log("numGen fMax", formulaMax);
+  return Math.floor(Math.random() * formulaMax + formulaMin);
 }
 
 function britishInsultGenerator() {
@@ -77,6 +78,7 @@ function resetGame() {
   formulaMin = 0;
   formulaMax = 101;
   randomNumber = numberGenerator();
+  rangeButton.setAttribute('disabled', true);
   disableButton();
 }
 
@@ -113,22 +115,16 @@ function inputRange(value) {
     return value; 
   }
 }
-//currently setting off a nonexitant max field!
-function setMin() {
+
+function setRange() {
   min = minField.value;
-  formulaMin = minField.value;
-  console.log("formulaMin", formulaMin);
-  console.log("min", min);
-  randomNumber = numberGenerator();
-  console.log("randomNumber", randomNumber);
-}
-//currently setting of a nonexistant min field!
-function setMax() {
   max = maxField.value;
-  formulaMax = maxField.value - minField.value;
-  console.log("formulaMax", formulaMax);
-  console.log("max", max);
+  formulaMin = parseInt(minField.value);
+  formulaMax = parseInt(maxField.value - minField.value);
   randomNumber = numberGenerator();
+  console.log("min, max", min, max);
+  console.log("formulaMax", formulaMax);
+  console.log("formulaMin", formulaMin);
   console.log("randomNumber", randomNumber);
 }
 
@@ -137,6 +133,15 @@ function increaseRange() {
   min -= 10;
   formulaMax += 20;
   formulaMin -= 10;
+}
+
+function enableSubmit() {
+  if (parseInt(maxField.value) > parseInt(minField.value)) {
+    rangeButton.removeAttribute('disabled');
+  }
+  else {
+    rangeButton.setAttribute('disabled', true);
+  }
 }
 
 /*Quality of Life*/
