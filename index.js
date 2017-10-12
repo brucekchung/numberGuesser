@@ -13,10 +13,25 @@ var formulaMin = 0;
 var rangeButton = document.getElementById('range-button');
 var minField = document.getElementById('min-box');
 var maxField = document.getElementById('max-box');
+var wins = document.getElementById('win-streak');
+var guesses = document.getElementById('guesses-remaining');
+var winStreak = 0;
+var guessesRemaining = 7;
 
 
 /*EVENT LISTENERS*/
 guessButton.addEventListener('click', getFeedback);
+//just wanted to try an anonymous function!
+guessButton.addEventListener('click', function() {
+  guessesRemaining--; 
+  guesses.innerText = guessesRemaining;
+  if (guessesRemaining == 0 && guessField.value != randomNumber) {
+    feedback.innerText = 'Game Over, ' + britishInsultGenerator();
+    guessButton.setAttribute('disabled', true);
+    clearButton.setAttribute('disabled', true);
+    resetButton.removeAttribute('disabled');
+  }
+})
 clearButton.addEventListener('click', clearInput);
 //two guessField event listeners in HTML
 resetButton.addEventListener('click', resetGame);
@@ -25,15 +40,13 @@ rangeButton.addEventListener('click', setRange);
 
 /*FUNCTIONS*/
 function numberGenerator() {
-  console.log("numGen fMin", formulaMin);
-  console.log("numGen fMax", formulaMax);
   return Math.floor(Math.random() * formulaMax + formulaMin);
 }
 
 function britishInsultGenerator() {
-  let adj = ["mangy", "dodgy", "daft", "barmy", "pikey", "trollop", "chuffer", "berk", "plug-ugly", "sod", "gormless", "incompetent"];
-  let noun = ["ninny", "nutter", "git", "wanker", "tosser", "slag", "cow", "twit", "ligger", "arsemonger", "mingebag", "cheese-eating surrender-monkey"];
-  return adj[Math.floor(Math.random() * 12)] + ' ' + noun[Math.floor(Math.random() * 12)]
+  let adj = ["mangy", "dodgy", "daft", "barmy", "pikey", "trollop", "chuffer", "berk", "plug-ugly", "sod", "gormless", "incompetent", "faffing", "eye-watering", "grotty little", "tinkling", "dozy", "manky", "skanky"];
+  let noun = ["ninny", "nutter", "git", "wanker", "tosser", "slag", "cow", "twit", "ligger", "arsemonger", "mingebag", "cheese-eating surrender-monkey", "driggle-draggle", "twat", "codger", "muppet", "nancy", "piss-artist", "wally", "wazzack"];
+  return adj[Math.floor(Math.random() * adj.length)] + ' ' + noun[Math.floor(Math.random() * noun.length)]
 }
 
 function getFeedback() {
@@ -47,6 +60,10 @@ function getFeedback() {
   else if (input == randomNumber) {
     feedback.innerText = 'Winner Winner Chicken Dinner! Increased max and min by 10!';
     lastGuess.innerText = guessField.value;
+    guessesRemaining = 8; 
+    guesses.innerText = '8';
+    winStreak++;
+    wins.innerText = winStreak;
     increaseRange();
     randomNumber = numberGenerator();
   }
@@ -77,14 +94,25 @@ function resetGame() {
   max = 100;
   formulaMin = 0;
   formulaMax = 101;
+  winStreak = 0;
+  wins.innerText = '0';
+  guessesRemaining = 7;
+  guesses.innerText = '7';
   randomNumber = numberGenerator();
+  guessButton.removeAttribute('disabled');
   rangeButton.setAttribute('disabled', true);
+  resetButton.setAttribute('disabled', true);
   disableButton();
 }
 
 function disableButton() {
-  clearButton.setAttribute('disabled', true);
-  resetButton.setAttribute('disabled', true);
+  if (typeof(parseInt(lastGuess.innerText)) == 'number') {
+    clearButton.setAttribute('disabled', true);
+  }
+  else {
+    clearButton.setAttribute('disabled', true);
+    resetButton.setAttribute('disabled', true);
+  }
 }
 
 function enableButton() {
@@ -122,10 +150,6 @@ function setRange() {
   formulaMin = parseInt(minField.value);
   formulaMax = parseInt(maxField.value - minField.value);
   randomNumber = numberGenerator();
-  console.log("min, max", min, max);
-  console.log("formulaMax", formulaMax);
-  console.log("formulaMin", formulaMin);
-  console.log("randomNumber", randomNumber);
 }
 
 function increaseRange() {

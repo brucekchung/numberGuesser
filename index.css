@@ -1,11 +1,23 @@
+/*Style*/
+* {
+  font-family: 'Open Sans', sans-serif, light;
+  font-weight: 300;
+}
 /*Structure*/
 body {
   margin: 0 auto;
 }
+
 header {
   width: 100%;  
   background-color: #404041;
   text-align: center;
+}
+
+h1 {
+  color: #E6E7E8;
+  font-size: 300%;
+  margin: 0 auto;
 }
 
 main {
@@ -23,22 +35,12 @@ main {
 }
 
 
-/*Style*/
-* {
-  font-family: 'Open Sans', sans-serif, light;
-  font-weight: 300;
-}
 
 .number {
   color: #ED458B;
   font-weight: 700;
 }
 
-h1 {
-  color: #E6E7E8;
-  font-size: 300%;
-  margin: 0 auto;
-}
 
 
 h2,
@@ -80,7 +82,7 @@ button:disabled {
   background-color: #D0D2D3;
 }
 .last-guess-text {
-  margin-top: 80px;
+  margin-top: 25px;
   display: block;
 }
 #guess-box {
