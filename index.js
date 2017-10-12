@@ -145,11 +145,12 @@ function inputRange(value) {
 }
 
 function setRange() {
-  min = minField.value;
-  max = maxField.value;
+  min = parseInt(minField.value);
+  max = parseInt(maxField.value);
   formulaMin = parseInt(minField.value);
   formulaMax = parseInt(maxField.value - minField.value);
   randomNumber = numberGenerator();
+  console.log("randomNumber", randomNumber);
 }
 
 function increaseRange() {
@@ -157,6 +158,7 @@ function increaseRange() {
   min -= 10;
   formulaMax += 20;
   formulaMin -= 10;
+  console.log("randomNumber", randomNumber);
 }
 
 function enableSubmit() {
