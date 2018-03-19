@@ -36,6 +36,8 @@ clearButton.addEventListener('click', clearInput);
 //two guessField event listeners in HTML
 resetButton.addEventListener('click', resetGame);
 rangeButton.addEventListener('click', setRange);
+//add comment
+
 
 
 /*FUNCTIONS*/
